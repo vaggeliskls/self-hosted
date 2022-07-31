@@ -1,0 +1,23 @@
+services:
+  nginx:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sentry.service=sentry"
+      - "traefik.http.routers.sentry.middlewares=compresstraefik"
+      - "traefik.http.middlewares.compresstraefik.compress=true"
+      - "traefik.http.services.sentry.loadbalancer.server.port=3000"
+      - "traefik.http.services.sentry.loadbalancer.passhostheader=true"
+      # https
+      - "traefik.http.routers.sentry.rule=Host(`sentry.evoml.ai`)"
+      - "traefik.http.routers.sentry.entrypoints=websecure"
+      - "traefik.http.routers.sentry.tls.certresolver=sentryssl"
+      - "traefik.http.routers.sentry.tls=true"
+      # http
+      - "traefik.http.routers.sentry-http.entrypoints=web"
+      - "traefik.http.routers.sentry-http.rule=Host(`sentry.evoml.ai`)"
+      - "traefik.http.routers.sentry.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"   
+networks:
+  default:
+    name: traefik-proxy-net
+    external: true
