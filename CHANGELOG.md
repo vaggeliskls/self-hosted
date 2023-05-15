@@ -1,5 +1,140 @@
 # Changelog
 
+## 23.4.0
+
+### Postgres 14 Upgrade
+
+We've now included an upgrade from Postgres 9.6 to 14.5 that will automatically be run via the `./install.sh` script.
+
+By: @hubertdeng123 (#2074)
+
+### Various fixes & improvements
+
+- Remove clean function testing line (#2082) by @hubertdeng123
+- Fix command to get docker compose version in problem report template (#2080) by @hubertdeng123
+- Tweak permissioning of backup file in backup script to read/write for all users (#2043) by @hubertdeng123
+- Remove commit-batch-size parameter (#2058) by @hubertdeng123
+- Support external sourcemaps bigger, than 1Mb (#2050) by @le0pard
+- Add github setup instructions to config.example.yml (#2051) by @tm1000
+- ref(snuba): Use snuba self-hosted settings (#2039) by @enochtangg
+
+## 23.3.1
+
+### Various fixes & improvements
+
+- Bump Kafka version to keep up with SaaS (#2037) by @chadwhitacre
+- Add Backup/restore scripts (#2029) by @hubertdeng123
+- Add opt in error monitoring to reset and clean scripts (#2021) by @hubertdeng123
+
+## 23.3.0
+
+### Various fixes & improvements
+
+- Remove ZooKeeper snapshot (#2020) by @dereckson
+- feat(snuba): Add snuba sessions subscription service (#2006) by @klboke
+- Add backup/restore integration tests (#2012) by @hubertdeng123
+- ref(snuba): Remove snuba-cleanup, snuba-transactions-cleanup jobs (#2003) by @klboke
+- ref(replays): Remove the session-replay-ui flag (#2010) by @ryan953
+- Remove broken replay integration test (#2011) by @hubertdeng123
+- Bump self-hosted-e2e-tests action commit sha (#2008) by @hubertdeng123
+- Revert symbolicator tests (#2004) by @hubertdeng123
+- post-process-forwarder: Update CLI command (#1999) by @lynnagara
+- feat(replays): add replays to self hosted (#1990) by @JoshFerge
+- Remove issue status helper automation (#1989) by @hubertdeng123
+- Add proxy buffer size config to fix Bad Gateway (#1984) by @SCjona
+- Reference paths relative to project root (#1800) by @spawnia
+- Run close stale issues/PRs only on getsentry (#1969) by @aminvakil
+
+## 23.2.0
+
+### Various fixes & improvements
+
+- Run lock issues/PRs only on getsentry (#1966) by @aminvakil
+- Updates Redis to 6.2.10 (#1937) by @danielhartnell
+- Handle missing example files gracefully (#1950) by @chadwhitacre
+- Fix post-release.sh for `git pull` (#1938) by @BYK
+- Manually change 23.1.1 to nightly (#1936) by @hubertdeng123
+
+## 23.1.1
+
+### Various fixes & improvements
+
+- ci: Add test for symbolicator pipeline (#1916) by @ethanhs
+
+## 23.1.0
+
+### Various fixes & improvements
+
+- ci: Check health of services after running integration tests and fix snuba-replacer (#1897) by @ethanhs
+- Add wal2json debugging (#1906) by @chadwhitacre
+- Pick up CI bugfix (#1905) by @chadwhitacre
+- ref: Move jq build to error-handling.sh, and use proxy config (#1895) by @ethanhs
+- fix(CI): use default curl retry mechanism for wal2json install (#1890) by @volokluev
+- ref: Retry wal2json download in installer (#1881) by @ethanhs
+- ci: Remove GCB and update Github Action SHA (#1880) by @ethanhs
+
+## 22.12.0
+
+### Various fixes & improvements
+
+- Build each service image individually (#1858) by @ethanhs
+- Set higher kafka healthcheck timeout and fix clickhouse timeout (#1855) by @ethanhs
+- Add --skip-sse42-requirements to install.sh and enable SKIP_SSE42_REQUIREMENTS override (#1790) by @erinaceous
+- Fix commit-log-topic parameter configuration problem (#1817) by @klboke
+- Add .idea to .gitignore (#1803) by @spawnia
+- Add USE_X_FORWARDED_HOST to example config (#1804) by @crinjes
+- (fix): Fix contributor PR e2e tests (#1820) by @hubertdeng123
+
+## 22.11.0
+
+### Various fixes & improvements
+
+- Fix jq usage (#1814) by @ethanhs
+- Try adding end to end tests using new action (#1806) by @ethanhs
+- Add context line, error msg to envelope (#1784) by @hubertdeng123
+- Update to actions/checkoutv3 to address upcoming github deprecations (#1792) by @mattgauntseo-sentry
+- ref: upgrade actions/setup-python to avoid set-output deprecation (#1789) by @asottile-sentry
+- Enforce error reporting (#1777) by @hubertdeng123
+- Upload end of log as breadcrumbs, use exceptions and stacktrace (#1775) by @ethanhs
+- Fix sentry release for dogfood instance (#1768) by @hubertdeng123
+- Add pre-commit config (#1738) by @ethanhs
+- Do not send event on INT signal (#1773) by @hubertdeng123
+
+## 22.10.0
+
+### Various fixes & improvements
+
+- Split post process forwarders (#1759) by @chadwhitacre
+- Revert "Enforce error reporting for self-hosted" (#1755) by @hubertdeng123
+- Enforce error reporting for self-hosted (#1753) by @hubertdeng123
+- ref: Remove unused scripts and code (#1710) by @BYK
+- Check to see if docker compose exists, else error out (#1733) by @hubertdeng123
+- Fix minimum version requirements for docker and docker compose (#1732) by @hubertdeng123
+- Factor out clean and use it in unit-test (#1731) by @chadwhitacre
+- Reorganize unit test layout (#1729) by @hubertdeng123
+- Request event ID in issue template (#1723) by @ethanhs
+- Tag releases with sentry-cli (#1718) by @hubertdeng123
+- Send full logs as an attachment to our dogfood instance (#1715) by @hubertdeng123
+
+## 22.9.0
+
+### Various fixes & improvements
+
+- Fix traceback hash for error monitoring (#1700) by @hubertdeng123
+- Add section about error monitoring to the README (#1699) by @ethanhs
+- Switch from .reporterrors file to flag + envvar (#1697) by @chadwhitacre
+- Rename flag to --skip-user-creation (#1696) by @chadwhitacre
+- Default to not sending data to Sentry for now (#1695) by @chadwhitacre
+- fix(e2e tests): Pull branch that initially triggers gcp build for PRs (#1694) by @hubertdeng123
+- fix(e2e tests): Add .reporterrors file for GCP run of e2e tests (#1691) by @hubertdeng123
+- Error monitoring of the self-hosted installer (#1679) by @ethanhs
+- added docker commands in the description (#1673) by @victorelec14
+- Use docker-compose 2.7.0 instead of 2.2.3 in CI (#1591) by @aminvakil
+
+## 22.8.0
+
+- No documented changes.
+
 ## 22.7.0
 
 ### Various fixes & improvements

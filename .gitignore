@@ -1,3 +1,6 @@
+# Error reporting choice cache
+.reporterrors
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -34,6 +37,9 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 sentry_install_log*.txt
+sentry_reset_log*.txt
+sentry_restore_log*.txt
+sentry_backup_log*.txt
 
 # Unit test / coverage reports
 htmlcov/
@@ -74,7 +80,10 @@ docker-compose.override.yml
 
 *.tar
 data/
+
+# Editor / IDE
 .vscode/tags
+.idea
 
 # custom Sentry config
 sentry/sentry.conf.py
