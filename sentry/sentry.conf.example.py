@@ -111,12 +111,10 @@ else:
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
         "LOCATION": ["memcached:11211"],
         "TIMEOUT": 3600,
-        "OPTIONS": {
-            "server_max_value_length": unit_text_to_bytes(env("SENTRY_MAX_EXTERNAL_SOURCEMAP_SIZE", "1M")),
-        },
+        "OPTIONS": {"ignore_exc": True}
     }
 }
 
@@ -187,6 +185,13 @@ SENTRY_TAGSTORE_OPTIONS = {}
 # The digest backend powers notification summaries.
 
 SENTRY_DIGESTS = "sentry.digests.backends.redis.RedisBackend"
+
+###################
+# Metrics Backend #
+###################
+
+SENTRY_RELEASE_HEALTH = "sentry.release_health.metrics.MetricsReleaseHealthBackend"
+SENTRY_RELEASE_MONITOR = "sentry.release_health.release_monitor.metrics.MetricReleaseMonitorBackend"
 
 ##############
 # Web Server #
@@ -269,6 +274,14 @@ SENTRY_FEATURES.update(
             "organizations:performance-view",
             "organizations:advanced-search",
             "organizations:session-replay",
+            "organizations:issue-platform",
+            "organizations:profiling",
+            "organizations:monitors",
+            "organizations:dashboards-mep",
+            "organizations:mep-rollout-flag",
+            "organizations:dashboards-rh-widget",
+            "organizations:metrics-extraction",
+            "organizations:transaction-metrics-extraction",
             "projects:custom-inbound-filters",
             "projects:data-forwarding",
             "projects:discard-groups",
@@ -311,8 +324,6 @@ if OPENAI_API_KEY:
 # Content Security Policy settings
 ##############################################
 
-if "csp.middleware.CSPMiddleware" not in MIDDLEWARE:
-    MIDDLEWARE = ("csp.middleware.CSPMiddleware",) + MIDDLEWARE
 # CSP_REPORT_URI = "https://{your-sentry-installation}/api/{csp-project}/security/?sentry_key={sentry-key}"
 CSP_REPORT_ONLY = True
 
